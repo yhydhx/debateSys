@@ -41,8 +41,8 @@ def loginCertifacate(request):
         md5Encode.update(tmpPassword)
         password = md5Encode.hexdigest()
 
-        user = get_object_or_404(User, username=username)
-        if user.password == password:
+        admin = get_object_or_404(Admin, username=username)
+        if admin.password == password:
             request.session['username'] = username
             return HttpResponseRedirect('/blog/news/show')
         else:
@@ -87,7 +87,7 @@ def addUser(request):
     md5Encode.update(tmpPassword)
     password = md5Encode.hexdigest()
     
-    veryfyUser = User.objects.filter(username = username).all()
+    veryfyUser = Admin.objects.filter(username = username).all()
     
     try:
         HttpResponse(veryfyUser[0])
@@ -96,11 +96,11 @@ def addUser(request):
     if veryfyUser is not None:
         return HttpResponse("This user is already exits")
 
-    user = User(
+    admin = Admin(
         username = username,
         password = password
         )
-    user.save()
+    admin.save()
     return render(request,"blog/login.html")
  
 def changePasswd(request):
