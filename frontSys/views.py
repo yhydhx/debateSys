@@ -15,14 +15,14 @@ import hashlib
 
 # Create your views here.
 def Index(request):
-	return HttpResponse("密码错误") 
+	return render(request,"frontSys/index.html")
 
 def Member(request):
-	return HttpResponse("get the mumber")
+	return render(request,"frontSys/member.html")
 
 def Article(request):
-	return	HttpResponse("get the articele")
+	return render(request,"frontSys/article.html")
 
 def Register(request):
-	return HttpResponse("register the MM")
+	return render(request,"frontSys/sign_up.html")
 

@@ -10,7 +10,7 @@ from debateSNS.models import *
 import datetime
 from django.utils import timezone
 from django.conf import settings
-import hashlib
+import hashlib, time
 
 
 '''def index(request):
@@ -65,7 +65,7 @@ def contact(request):
     return render(request, 'contact.html', {
         'form': form,
     })
-'''
+    '''
     if request.method == 'POST':
         username = request.POST.get("username")
         request.session['username'] = data
@@ -131,63 +131,88 @@ def index(request):
     return render(request,'blog/index2.html')
 
 
-########################################################
-# this view is about the news 
-# contains show news list , add news , change news, 
-# delete news,and add new news
-# News contain three parts , title content date                 
-########################################################
-
-def news(request,method,Oid):
+def generateInvitingCode(request):
     try:
         request.session['username']
     except KeyError,e:
         return HttpResponseRedirect('login.html')
 
-    if method == 'addNews' or method == '':
+    currentTime = time.time()
+    md5Encode = hashlib.new("ripemd160")
+    md5Encode.update(str(currentTime))
+    invitingCode = md5Encode.hexdigest()
+    newCode = InvitingCode(
+        code = invitingCode,
+        generate_user  =  request.session['username'],
+        isUsed = 0
+    )
+    newCode.save()
+    return HttpResponse(invitingCode)
+
+
+########################################################
+# this view is about the article 
+# contains show article list , add article , change article, 
+# delete article,and add new article
+# News contain three parts , title content publish_time                 
+########################################################
+
+def article(request,method,Oid):
+    try:
+        request.session['username']
+    except KeyError,e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'addArticle' :
         title = request.POST.get('title')
         content = request.POST.get('content')
-        date = datetime.datetime.now()
-        news = News(
+        publish_time = datetime.datetime.now()
+        author = request.session['username']
+        introduction = request.POST.get('introduction')
+        article = Article(
             title=title,
             content = content,
-            date = date,
-            uploadUser = request.session['username'],
-
+            publish_time = publish_time,
+            author = author,
+            introduction = introduction,
             )
-        news.save()
+        article.save()
         #Oid = news.id
-        return HttpResponseRedirect('/blog/news/show')
+        return HttpResponseRedirect('/blog/article/show')
     elif method == 'change':
-        news = News.objects.get(id=Oid)
-        News.date_format(news)
+        article = Article.objects.get(id=Oid)
+        Article.date_format(article)
         #return HttpResponse(Oid)
-        return render(request,'blog/changeNews.html',{'news':news})
+        return render(request,'blog/changeArticle.html',{'article':article})
     elif method == 'save':
         if request.method == 'POST':
-            news = {'id' : request.POST.get('id'),
+            article = {'id' : request.POST.get('id'),
                 'title' : request.POST.get('title'),
                 'content' : request.POST.get('content'),
-                'date' : request.POST.get('date')
+                'publish_time' : request.POST.get('publish_time'),
+                'introduction' : request.POST.get('introduction'),
                 }
 
-        News.objects.filter(id=news['id']).update(content=news['content'])
-        News.objects.filter(id=news['id']).update(title=news['title'])
-        News.objects.filter(id=news['id']).update(date=news['date'])
-       
-        return HttpResponseRedirect('/blog/news/show')
+        Article.objects.filter(id=article['id']).update(content=article['content'],
+                                                                                title = article['title'],
+                                                                                publish_time = article['publish_time'],
+                                                                                introduction = article['introduction'],
+                                                                                )
+
+        return HttpResponseRedirect('/blog/article/show')
     elif method == 'delete':
-        News.objects.filter(id=Oid).delete()
+        Article.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show')
     elif method == 'add':
-        return render(request,'blog/addNewsView.html')
-    elif method == 'show':
-        allNews = News.objects.all()
-        for element in allNews:
-             News.date_format(element)
-        return render(request,'blog/showNewsList.html',{'news':index})
+        return render(request,'blog/addArticleView.html')
+    elif method == 'show' or method == '':
+        allArticle = Article.objects.all()
+        for element in allArticle:
+             Article.date_format(element)
+        return render(request,'blog/showArticleList.html',{'article':allArticle})
     else:
         return HttpResponse('没有该方法')
+
 
 
 ########################################################
@@ -224,8 +249,8 @@ def product(request,method,Oid):
                 'content' : request.POST.get('content'),
                 }
 
-        Product.objects.filter(id=product['id']).update(content=product['content'])
-        Product.objects.filter(id=product['id']).update(title=product['title'])
+        Product.objects.filter(id=product['id']).update(content=product['content'],title=product['title'])
+        #Product.objects.filter(id=product['id']).update(title=product['title'])
         Oid = product['id']
         return HttpResponseRedirect('/blog/product/show')
 

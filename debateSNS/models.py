@@ -74,7 +74,7 @@ class Activity(models.Model):
         return self.title
 
 class Article(models.Model):
-    name = models.CharField(max_length = 100)
+    title = models.CharField(max_length = 100)
     publish_time = models.DateTimeField()
     author = models.CharField(max_length =100)
     introduction = models.CharField(max_length = 100)

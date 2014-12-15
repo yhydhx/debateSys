@@ -1,0 +1,57 @@
+
+########################################################
+# this view is about the news 
+# contains show news list , add news , change news, 
+# delete news,and add new news
+# News contain three parts , title content date                 
+########################################################
+
+def news(request,method,Oid):
+    try:
+        request.session['username']
+    except KeyError,e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'addNews' or method == '':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        date = datetime.datetime.now()
+        news = News(
+            title=title,
+            content = content,
+            date = date,
+            uploadUser = request.session['username'],
+            )
+        news.save()
+        #Oid = news.id
+        return HttpResponseRedirect('/blog/news/show')
+    elif method == 'change':
+        news = News.objects.get(id=Oid)
+        News.date_format(news)
+        #return HttpResponse(Oid)
+        return render(request,'blog/changeNews.html',{'news':news})
+    elif method == 'save':
+        if request.method == 'POST':
+            news = {'id' : request.POST.get('id'),
+                'title' : request.POST.get('title'),
+                'content' : request.POST.get('content'),
+                'date' : request.POST.get('date')
+                }
+
+        News.objects.filter(id=news['id']).update(content=news['content'])
+        News.objects.filter(id=news['id']).update(title=news['title'])
+        News.objects.filter(id=news['id']).update(date=news['date'])
+       
+        return HttpResponseRedirect('/blog/news/show')
+    elif method == 'delete':
+        News.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        return render(request,'blog/addNewsView.html')
+    elif method == 'show':
+        allNews = News.objects.all()
+        for element in allNews:
+             News.date_format(element)
+        return render(request,'blog/showNewsList.html',{'news':allNews})
+    else:
+        return HttpResponse('没有该方法')
