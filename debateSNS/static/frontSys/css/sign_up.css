@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+#sign_up_form {
+	width: 30%;
+	margin: 20px auto 50px;
+}
+
+#sign_up_form button {
+	margin: 20px 0px 0px auto;;
+}
