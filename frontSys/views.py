@@ -79,3 +79,10 @@ def loginCertificate(request):
 	if encodedPassword != checkUser[0].password:
 		return HttpResponse("password error")
 	return HttpResponseRedirect("article.html")
+
+def articleDetail(request,Oid):
+	article = Article.objects.filter(id = Oid)
+	if len(article) == 0:
+		return HttpResponse("the article is not exist")
+
+	return render(request,'frontSys/content.html', {'article':article[0]})

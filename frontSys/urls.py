@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^register\.html$', views.register, name = "register"),
     url(r'^loginCertificate$', views.loginCertificate, name = "loginCertificate"),
     url(r'^addUser$', views.addUser, name = "addUser"),
+    url(r'^articleDetail/(?P<Oid>\w+)$', views.articleDetail,name ='articleDetail'),
 )
