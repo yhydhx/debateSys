@@ -3,8 +3,9 @@ from django.conf.urls import patterns, url
 from frontSys import views
 
 urlpatterns = patterns('',
-    url(r'^index\.html$', views.Index, name = "Index"),
-    url(r'^member\.html$', views.Member, name = "member"),
-    url(r'^article\.html$', views.Article, name = "article"),
-    url(r'^register\.html$', views.Register, name = "register"),
+    url(r'^index\.html$', views.fsIndex, name = "Index"),
+    url(r'^member\.html$', views.fsMember, name = "member"),
+    url(r'^article\.html$', views.fsArticle, name = "article"),
+    url(r'^register\.html$', views.register, name = "register"),
+    url(r'^loginCertificate$', views.loginCertificate, name = "loginCertificate"),
 )

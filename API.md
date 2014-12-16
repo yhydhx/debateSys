@@ -62,5 +62,5 @@ regist : {
 	'email' :  ####
 	'password' :  ####
 	'inviting_code' :  ####
-	'user_flag' :  ####
+
 }
