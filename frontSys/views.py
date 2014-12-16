@@ -13,7 +13,7 @@ from django.conf import settings
 import hashlib
 
 # Create your views here.
-def fsIndex(request):
+def fsIndex(request,arg1,arg2):
 	return render(request,"frontSys/index.html",{'acitiviyList':Activity.objects.all()})
 
 def fsMember(request):
@@ -25,28 +25,33 @@ def fsArticle(request):
 def register(request):
 	return render(request,"frontSys/sign_up.html")
 
-def loginCertificate(request):
-	'''IVTCode = request.POST.get('InvitingCode');
+def addUser(request):
+
 	name = request.POST.get('name')
 	email = request.POST.get('email')
 	password = request.POST.get('password')
 	inviting_code = request.POST.get('inviting_code')
-	'''
 	
-	name = 'dai'
-	email  = 'dai@125.com'
-	password = '123'
-	inviting_code = '0599c195f01dc37b1abddc9fd36866ef92e51d61'
-
 
 	'''  check and update the state of the InvitingCode'''
-	code = InvitingCode.objects.filter(code=inviting_code)[0]
-	isUsed = int(code.isUsed)
+	code = InvitingCode.objects.filter(code=inviting_code)
+
+	#check the codloginCertificatee is exist 
 	
+	if len(code) == 0:
+		return HttpResponse("The code is not exist")
+	else:
+		isUsed = int(code[0].isUsed)
+	
+	#check the code is not used
 	if isUsed == 1:
 		return HttpResponse("The code is not valid")
-	else:
-		InvitingCode.objects.filter(code=inviting_code).update(isUsed = 1)
+	#check the username is exist 
+	checkUser = User.objects.filter(name = name)
+
+	if ( not (len(checkUser) ==  0)):
+		return HttpResponse("The username is already exist")
+
 	'''regitst a new user'''
 	encodedPassword = hashlib.md5(password).hexdigest()
 	newUser = User(
@@ -57,4 +62,20 @@ def loginCertificate(request):
 		user_flag = 0
 		)
 	newUser.save()
+	InvitingCode.objects.filter(code=inviting_code).update(isUsed = 1)
 	return HttpResponseRedirect('index.html')
+
+def loginCertificate(request):
+	
+
+	name = request.POST.get("name")
+	password = request.POST.get('password')
+	encodedPassword = hashlib.md5(password).hexdigest()
+	
+	checkUser = User.objects.filter(name = name)
+	if len(checkUser) == 0 :
+		return HttpResponse("user is not exit")
+
+	if encodedPassword != checkUser[0].password:
+		return HttpResponse("password error")
+	return HttpResponseRedirect("article.html")

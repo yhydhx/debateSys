@@ -34,12 +34,12 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">首页</a>
+                  <a class="navbar-brand" href="/index.html">首页</a>
               </div>
           
               <div id="navbar" class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
-                      <li><a href="#"><i class="icon-envelope"></i>&nbsp;文章</a></li>
+                      <li><a href="/article.html"><i class="icon-envelope"></i>&nbsp;文章</a></li>
                       <li><a href="#"><i class="icon-bookmark"></i>&nbsp;活动</a></li>
                       <li><a href="#"><i class="icon-wrench"></i>&nbsp;小工具</a></li>
                   </ul>
@@ -58,30 +58,23 @@
               </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
     	</nav>
-    
-	<div class="container marketing">
 
-		<div style="text-align: center;">
-        	<h1>所有文章</h1>
-        </div>
-        
+    
+      <div class="container marketing">  
       	<!-- START THE FEATURETTES -->
-		<hr class="featurette-divider">
-        
+	{% for article in articleList reversed %}
       	<div class="row featurette">
         	<div class="col-md-7">
-          		<h2 class="featurette-heading">文章标题<span class="text-muted">副标题</span></h2>
-          		<p class="lead">内容只有一个句子。</p>
+          		<h2 class="featurette-heading">{{ article.title }}<span class="text-muted"><small>written by&nbsp{{article.author}}</small></span></h2>
+          		<p class="lead">{{ article.introduction }}</p>
         	</div>
         
-        	<div class="col-md-5">
-          		<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE5MC4zMTI1IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MjNwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj41MDB4NTAwPC90ZXh0PjwvZz48L3N2Zz4=" data-holder-rendered="true">
-        </div>
       </div>
-
+	<!--
       <hr class="featurette-divider">
 
       <div class="row featurette">
+
         <div class="col-md-5">
           <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE5MC4zMTI1IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MjNwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj41MDB4NTAwPC90ZXh0PjwvZz48L3N2Zz4=" data-holder-rendered="true">
         </div>
@@ -89,24 +82,12 @@
           <h2 class="featurette-heading">文章标题<span class="text-muted">副标题</span></h2>
           <p class="lead">内容只有一个句子。</p>
         </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">文章标题<span class="text-muted">副标题</span></h2>
-          <p class="lead">内容只有一个句子。</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE5MC4zMTI1IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MjNwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj41MDB4NTAwPC90ZXh0PjwvZz48L3N2Zz4=" data-holder-rendered="true">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
+      </div>-->
+	{% endfor %}
+	</div>
       <!-- /END THE FEATURETTES -->
 
+	<hr class="featurette-divider">
 
       <!-- FOOTER -->
       <footer>
