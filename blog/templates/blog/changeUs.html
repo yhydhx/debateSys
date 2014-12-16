@@ -4,11 +4,12 @@
 <!-- Place this in the body of the page content -->
 <form method="post" action='../save/'>
 		 {% csrf_token %}
-	<h2><input name='title' value = {{us.title}} ></h2>
-    <h3>输入优先级<input name="order" value={{us.order}}>（数字）</h3>
-    <textarea name= 'content'>{{us.content}}</textarea>
+	<h2><input name='name' value = {{member.name}} ></h2>
+    <h3>输入优先级<input name="showOrder" value={{member.showOrder}}>（数字）</h3>
+    <img src="{{member.image}}"  alt="上海鲜花港 - 郁金香" />
+    <textarea name= 'content'>{{member.description}}</textarea>
 
-    <input type='hidden' name='id' value = {{us.id}}>
+    <input type='hidden' name='id' value = {{member.id}}>
     <input type='submit' value="确认">
     <input type='button' onclick = "history.go(-1)" value="取消">
 </form>

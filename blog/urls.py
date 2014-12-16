@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^logout$', views.logout,name ='logout'),
  
     url(r'^article/(?P<method>\w+)/(?P<Oid>\w*)$', views.article,name ='article'),
-    url(r'^product/(?P<method>\w+)/(?P<Oid>\w*)$', views.product,name ='product'),
+    url(r'^activity/(?P<method>\w+)/(?P<Oid>\w*)$', views.activity,name ='activity'),
     url(r'^plan/(?P<method>\w+)/(?P<Oid>\w*)$', views.plan,name ='plan'),
     url(r'^recruit/(?P<method>\w+)/(?P<Oid>\w*)$', views.recruit,name ='recruit'),
     url(r'^contact/(?P<method>\w+)/(?P<Oid>\w*)$', views.contact,name ='contact'),

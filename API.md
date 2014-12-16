@@ -1,11 +1,13 @@
 API Document
 
 Index:{
-	'acitivies':[{
+	'acitiviyList':[{
+		'title' : '###'
 		'introduction' : '###'
 		'time' : ###
 		'pulisher' : ###
 	},{
+		'title':'###'
 		'introduction' : '###'
 		'time' : ###
 		'pulisher' : ###
@@ -19,12 +21,12 @@ Index:{
 
 Article:{
 	'articlesList':[{
-		'name' : ####
+		'title' : ####
 		'publish_time' : ####
 		'author' : ####
 		'introduction' : ####
 	},{
-		'name' : ####
+		'title' : ####
 		'publish_time' : ####
 		'author' : ####
 		'introduction' : ####

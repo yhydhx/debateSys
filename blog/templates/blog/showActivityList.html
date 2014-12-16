@@ -125,7 +125,6 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 			<!-- BEGIN SIDEBAR MENU -->        
 
 			{% include 'blog/left.html'  %}
-
 			<!-- END SIDEBAR MENU -->
 
 		</div>
@@ -136,78 +135,48 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 		<div class="page-content">
 			<div id="wpbody-content" aria-label="主内容" tabindex="0" style="margin-top:40px">
-		<div id="screen-meta" class="metabox-prefs">
 
-	
-				<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="“显示选项”选项卡">
-		<form id="adv-settings" action="" method="post">
-					<h5>显示下列项目</h5>
-					<div class="metabox-prefs">
-				<label for="author-hide"><input class="hide-column-tog" name="author-hide" type="checkbox" id="author-hide" value="author" checked="checked">作者</label>
-<label for="categories-hide"><input class="hide-column-tog" name="categories-hide" type="checkbox" id="categories-hide" value="categories" checked="checked">分类目录</label>
-<label for="tags-hide"><input class="hide-column-tog" name="tags-hide" type="checkbox" id="tags-hide" value="tags" checked="checked">标签</label>
-<label for="comments-hide"><input class="hide-column-tog" name="comments-hide" type="checkbox" id="comments-hide" value="comments" checked="checked">评论</label>
-<label for="date-hide"><input class="hide-column-tog" name="date-hide" type="checkbox" id="date-hide" value="date" checked="checked">日期</label>
-				<br class="clear">
-			</div>
-				<div class="screen-options">
-							<input type="number" step="1" min="1" max="999" class="screen-per-page" name="wp_screen_options[value]" id="edit_post_per_page" maxlength="3" value="20">
-				<label for="edit_post_per_page">
-					airitlce				</label>
-			<input type="submit" name="screen-options-apply" id="screen-options-apply" class="button" value="应用">			<input type="hidden" name="wp_screen_options[option]" value="edit_post_per_page">
-		</div>
-				<div><input type="hidden" id="screenoptionnonce" name="screenoptionnonce" value="5cdd7608a8"></div>
-		</form>
-		</div>
-				</div>
-				<div id="screen-meta-links">
-					<div id="contextual-help-link-wrap" class="hide-if-no-js screen-meta-toggle">
-			<a href="#contextual-help-wrap" id="contextual-help-link" class="show-settings" aria-controls="contextual-help-wrap" aria-expanded="false">帮助</a>
-			</div>
-					<div id="screen-options-link-wrap" class="hide-if-no-js screen-meta-toggle">
-			<a href="#screen-options-wrap" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false">显示选项</a>
-			</div>
-				</div>
-		<div class="wrap">
-<h2>文章 <a href="../add" class="add-new-h2">写文章</a></h2>
-
-
-<form id="posts-filter" action="" method="get">
-
-<input type="hidden" name="orderby" value="title"><input type="hidden" name="order" value="asc">
-
-<input type="hidden" name="post_status" class="post_status_page" value="all">
-<input type="hidden" name="post_type" class="post_type_page" value="post">
-
-<input type="hidden" id="_wpnonce" name="_wpnonce" value="e924fa65ff"><input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit.php?orderby=title&amp;order=asc">	
-<table class="wp-list-table widefat fixed posts">
-	<thead>
-	<tr>
-		<th scope="col" id="title" class="manage-column column-title sorted asc" style=""><span>标题</span></th><th scope="col" id="categories" class="manage-column column-categories" style="">分类目录</th>
-		<th scope="col" id="date" class="manage-column column-date sortable asc" style=""><span>日期</span></th>	</tr>
-	</thead>
-
-
-	{% block content %}
-    <ul>
-        {% for publisher in article %}
-           
-            	<tbody id="the-list">
-				<tr id="post-1" class="post-1 type-post status-publish format-standard hentry category-uncategorized alternate iedit author-self level-0">
 				
-			<td class="post-title page-title column-title"><strong><a class="row-title" href="/blog/article/change/{{publisher.id}}" title="编辑{{ publisher.title }}">{{ publisher.title }}</a></strong>
-<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
-<div class="row-actions"><span class="edit"><a href="/blog/article/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/blog/article/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/article/{{publisher.id}}" title="查看“世界，你好！”" rel="permalink">查看</a></span></div>
-</td>		
-			<td class="categories column-categories">文章</td>
-			<td class="date column-date"><abbr >{{publisher.publish_time}}</abbr></td>		</tr>
+		<div class="wrap">
+			<h2>活动 <a href="/blog/activity/add/" class="add-new-h2">增加活动</a></h2>
+
+
+
+			<form id="posts-filter" action="" method="get">
+
+			<input type="hidden" name="orderby" value="title"><input type="hidden" name="order" value="asc">
+
+			<input type="hidden" name="post_status" class="post_status_page" value="all">
+			<input type="hidden" name="post_type" class="post_type_page" value="post">
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="e924fa65ff"><input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit.php?orderby=title&amp;order=asc">	
+			<table class="wp-list-table widefat fixed posts">
+				<thead>
+				<tr>
+					<th scope="col" id="title" class="manage-column column-title sorted asc" style=""><span>标题</span></th><th scope="col" id="categories" class="manage-column column-categories" style="">分类目录</th>
+				</tr>
+				</thead>
+
+
+				{% block content %}
+			    <ul>
+			        {% for publisher in activity %}
+			           
+			            	<tbody id="the-list">
+							<tr id="post-1" class="post-1 type-post status-publish format-standard hentry category-uncategorized alternate iedit author-self level-0">
+							
+						<td class="post-title page-title column-title"><strong><a class="row-title" href="/blog/activity/change/{{publisher.id}}" title="编辑{{ publisher.title }}">{{ publisher.title }}</a></strong>
+			<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
+			<div class="row-actions"><span class="edit"><a href="/blog/activity/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/blog/activity/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/activity/{{publisher.id}}" title="查看“世界，你好！”" rel="permalink">查看</a></span></div>
+			</td>		
+			<td class="categories column-categories">活动</td>
+			</tr>
 		</tbody>
         {% endfor %}
     </ul>
 	{% endblock %}
 
 </table>
-	
 
 		<br class="clear">
 	</div>
@@ -215,14 +184,16 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 </form>
 
 
+	
 
+
+<br class="clear">
+</div>
+
+
+<div class="clear"></div></div>
 
 		</div>
-
-
-	</div>
-
-	</div>
 
 		<!-- END PAGE -->
 
@@ -230,6 +201,8 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 	<!-- END CONTAINER -->
 
+
+	<!-- END FOOTER -->
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 

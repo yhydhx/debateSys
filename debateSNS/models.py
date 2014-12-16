@@ -64,7 +64,7 @@ class Image(models.Model):
     #file = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')
     
 class Activity(models.Model):
-    issue_name = models.CharField(max_length = 100)
+    title = models.CharField(max_length = 100)
     introduction = models.CharField(max_length = 500)
     time = models.DateTimeField()
     pulisher = models.CharField(max_length = 100)
@@ -86,10 +86,12 @@ class Article(models.Model):
 
 class Member(models.Model):
     name = models.CharField(max_length = 100)
+    showOrder = models.IntegerField()
     image = models.CharField(max_length = 200)
     description = models.CharField(max_length = 200)
     blog_href = models.CharField(max_length = 200)
     uploadUser = models.CharField(max_length = 100)
+
 
 class User(models.Model):
     name = models.CharField(max_length = 100)

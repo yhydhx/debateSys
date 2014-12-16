@@ -15,13 +15,13 @@ import hashlib
 
 # Create your views here.
 def Index(request):
-	return render(request,"frontSys/index.html")
+	return render(request,"frontSys/index.html",{'acitiviyList':Activity.objects.all()})
 
 def Member(request):
-	return render(request,"frontSys/member.html")
+	return render(request,"frontSys/member.html",{'memberList':Member.objects.all()})
 
 def Article(request):
-	return render(request,"frontSys/article.html")
+	return render(request,"frontSys/article.html",{'articleList':Article.objects.all()})
 
 def Register(request):
 	return render(request,"frontSys/sign_up.html")
