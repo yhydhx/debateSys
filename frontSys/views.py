@@ -13,7 +13,7 @@ from django.conf import settings
 import hashlib
 
 # Create your views here.
-def fsIndex(request):
+def fsIndex(request,arg1,arg2):
 	return render(request,"frontSys/index.html",{'acitiviyList':Activity.objects.all()})
 
 def fsMember(request):
@@ -26,23 +26,17 @@ def register(request):
 	return render(request,"frontSys/sign_up.html")
 
 def addUser(request):
-	'''IVTCode = request.POST.get('InvitingCode');
+
 	name = request.POST.get('name')
 	email = request.POST.get('email')
 	password = request.POST.get('password')
 	inviting_code = request.POST.get('inviting_code')
-	'''
 	
-	name = 'jupiter'
-	email  = 'dai@125.com'
-	password = '123'
-	inviting_code = 'd96ad45934e8852e0dc1206178b523c3f2bbdb71'
-
 
 	'''  check and update the state of the InvitingCode'''
 	code = InvitingCode.objects.filter(code=inviting_code)
 
-	#check the code is exist 
+	#check the codloginCertificatee is exist 
 	
 	if len(code) == 0:
 		return HttpResponse("The code is not exist")
@@ -54,7 +48,7 @@ def addUser(request):
 		return HttpResponse("The code is not valid")
 	#check the username is exist 
 	checkUser = User.objects.filter(name = name)
-	
+
 	if ( not (len(checkUser) ==  0)):
 		return HttpResponse("The username is already exist")
 
@@ -72,4 +66,16 @@ def addUser(request):
 	return HttpResponseRedirect('index.html')
 
 def loginCertificate(request):
-	return HttpResponse("hellowrold")
+	
+
+	name = request.POST.get("name")
+	password = request.POST.get('password')
+	encodedPassword = hashlib.md5(password).hexdigest()
+	
+	checkUser = User.objects.filter(name = name)
+	if len(checkUser) == 0 :
+		return HttpResponse("user is not exit")
+
+	if encodedPassword != checkUser[0].password:
+		return HttpResponse("password error")
+	return HttpResponseRedirect("article.html")

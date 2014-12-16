@@ -34,12 +34,12 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">首页</a>
+                  <a class="navbar-brand" href="/index.html">首页</a>
               </div>
           
               <div id="navbar" class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
-                      <li><a href="#"><i class="icon-envelope"></i>&nbsp;文章</a></li>
+                      <li><a href="/article.html"><i class="icon-envelope"></i>&nbsp;文章</a></li>
                       <li><a href="#"><i class="icon-bookmark"></i>&nbsp;活动</a></li>
                       <li><a href="#"><i class="icon-wrench"></i>&nbsp;小工具</a></li>
                   </ul>
@@ -58,23 +58,26 @@
               </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
     	</nav>
-      
-    <div class="container">
+	      
+
+    <div class="container" style="margin-top: 40px; margin-bottom: 45px; width: 50%;">
+
 		<div id="sign_up_form">		
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" method="post" action="/addUser">
+                         {% csrf_token %}
                 <div class="form-group">
                     <label for="InputEmail">邮箱：</label>
-                    <input type="email" class="form-control" id="InputEmail" placeholder="请输入您的邮箱地址">
+                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="请输入您的邮箱地址">
                 </div>
                 
                 <div class="form-group">
-                    <label for="InputEmail">用户名：</label>
-                    <input type="email" class="form-control" id="InputEmail" placeholder="请输入您的用户名">
+                    <label for="InputUsername">用户名：</label>
+                    <input type="text" name="name" class="form-control" id="InputUsername" placeholder="请输入您的用户名">
                 </div>
                 
                 <div class="form-group">
                     <label for="InputPassword1">密码：</label>
-                    <input type="password" class="form-control" id="InputPassword1" placeholder="请输入您的密码">
+                    <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="请输入您的密码">
                 </div>
                 
                 <div class="form-group">
@@ -84,7 +87,7 @@
                 
                 <div class="form-group">
                     <label for="InputInvitingCode">邀请码：</label>
-                    <input type="text" class="form-control" id="InputInvitingCode" placeholder="请输入您的邀请码">
+                    <input type="text" name="inviting_code" class="form-control" id="InputInvitingCode" placeholder="请输入您的邀请码">
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block">注册</button>
