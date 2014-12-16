@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^article\.html$', views.fsArticle, name = "article"),
     url(r'^register\.html$', views.register, name = "register"),
     url(r'^loginCertificate$', views.loginCertificate, name = "loginCertificate"),
+    url(r'^addUser$', views.addUser, name = "addUser"),
 )

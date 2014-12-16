@@ -25,7 +25,7 @@ def fsArticle(request):
 def register(request):
 	return render(request,"frontSys/sign_up.html")
 
-def loginCertificate(request):
+def addUser(request):
 	'''IVTCode = request.POST.get('InvitingCode');
 	name = request.POST.get('name')
 	email = request.POST.get('email')
@@ -33,20 +33,31 @@ def loginCertificate(request):
 	inviting_code = request.POST.get('inviting_code')
 	'''
 	
-	name = 'dai'
+	name = 'jupiter'
 	email  = 'dai@125.com'
 	password = '123'
-	inviting_code = '0599c195f01dc37b1abddc9fd36866ef92e51d61'
+	inviting_code = 'd96ad45934e8852e0dc1206178b523c3f2bbdb71'
 
 
 	'''  check and update the state of the InvitingCode'''
-	code = InvitingCode.objects.filter(code=inviting_code)[0]
-	isUsed = int(code.isUsed)
+	code = InvitingCode.objects.filter(code=inviting_code)
+
+	#check the code is exist 
 	
+	if len(code) == 0:
+		return HttpResponse("The code is not exist")
+	else:
+		isUsed = int(code[0].isUsed)
+	
+	#check the code is not used
 	if isUsed == 1:
 		return HttpResponse("The code is not valid")
-	else:
-		InvitingCode.objects.filter(code=inviting_code).update(isUsed = 1)
+	#check the username is exist 
+	checkUser = User.objects.filter(name = name)
+	
+	if ( not (len(checkUser) ==  0)):
+		return HttpResponse("The username is already exist")
+
 	'''regitst a new user'''
 	encodedPassword = hashlib.md5(password).hexdigest()
 	newUser = User(
@@ -57,4 +68,8 @@ def loginCertificate(request):
 		user_flag = 0
 		)
 	newUser.save()
+	InvitingCode.objects.filter(code=inviting_code).update(isUsed = 1)
 	return HttpResponseRedirect('index.html')
+
+def loginCertificate(request):
+	return HttpResponse("hellowrold")
