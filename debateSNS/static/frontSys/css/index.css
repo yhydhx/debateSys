@@ -1,0 +1,120 @@
+html,body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #fff;
+}
+
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { 
+	font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.navbar {
+	position: relative;
+	width: 100%;
+	margin-top: -5px;
+  background-color: #f2f5e9;
+  border-radius: 0px;
+  color: #fff;
+}
+
+#site_header {
+	background-color: #fff;
+	padding: 0px;
+	margin: 40px 0px 20px 0px;
+}
+
+#site_title {
+	display: inline-block;
+	positon: relative;
+	width: 40%;
+	margin: 0px 10px 10px auto;
+	padding: 0px auto 10px auto;
+}
+
+#site_title h1{
+	font-size: 150px;
+}
+
+#site_title h2{
+	font-size: 80px;
+}
+
+#site_title h1,h2{
+	font-weight: bolder;
+}
+
+#site_title h1,h2,form{
+	color: #000;
+}
+
+#sign_in_box { 
+	display: inline-block;
+	width: 46%;
+	height: 100%;
+	padding: auto;
+	margin: 0px auto;
+	border-left: 1px solid #000;
+}
+
+#sign_in_box .btn {
+	background-color: #95b93c;
+	border-color: #eee;
+}
+
+#sign_in_box .btn:hover {
+	background-color: #98bf06;
+	border-color: #eee;
+}
+
+#log_in_box { 
+	display: inline-block;
+	width: 48%;
+	height: 100%;
+	padding: auto;
+	margin: 0px auto;
+}
+
+#log_in_box .btn {
+	background-color: #95b93c;
+	border-color: #eee;
+}
+
+#log_in_box .btn:hover {
+	background-color: #98bf06;
+	border-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 5px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 18px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
