@@ -2,15 +2,13 @@
 
 
 <!-- Place this in the body of the page content -->
-<form method="post" action='../save'>
+<form method="post" action='../save/'>
 		 {% csrf_token %}
-	<li><h4><input name='tel' value = {{contact.tel}} ></h4></li>
-    <li><h4><input name='email' value = {{contact.email}} ></h4></li>
-    <li><h4><input name='address' value = {{contact.address}} ></h4></li>
-    <input type='hidden' name='id' value = {{contact.id}}>
+	<h2><input name='title' value = '{{activity.title}}' ></h2>
+    <textarea name= 'introduction'>{{activity.introduction}}</textarea>
+    <input type='hidden' name='id' value = {{activity.id}}>
     <input type='submit' value="确认">
     <input type='button' onclick = "history.go(-1)" value="取消">
-
 </form>
 
 <script type="text/javascript" src="{% static 'blog/js/tinymce/tinymce.min.js' %}"  ></script>
@@ -18,7 +16,6 @@
 tinymce.init({
     selector: "textarea",
    language:"zh_CN",        
-
     plugins: 'link paste code image',
                                     paste_as_text: true,
                                     browser_spellcheck: true,

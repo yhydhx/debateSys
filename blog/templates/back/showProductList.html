@@ -101,6 +101,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 	<div class="header navbar navbar-inverse navbar-fixed-top">
 
 		<!-- BEGIN TOP NAVIGATION BAR -->
+
 		<div class="navbar-inner">
 			<div style="margin-left:90%">
 			<button href = "logout" class="dropdown user" onclick = "window.location.href='logout'" style = "posi">退出登录</button>
@@ -123,7 +124,6 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 			<!-- BEGIN SIDEBAR MENU -->        
 
-			
 			{% include 'blog/left.html'  %}
 			<!-- END SIDEBAR MENU -->
 
@@ -206,7 +206,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 				<div class="screen-options">
 							<input type="number" step="1" min="1" max="999" class="screen-per-page" name="wp_screen_options[value]" id="edit_post_per_page" maxlength="3" value="20">
 				<label for="edit_post_per_page">
-					article				</label>
+					新闻				</label>
 			<input type="submit" name="screen-options-apply" id="screen-options-apply" class="button" value="应用">			<input type="hidden" name="wp_screen_options[option]" value="edit_post_per_page">
 		</div>
 				<div><input type="hidden" id="screenoptionnonce" name="screenoptionnonce" value="5cdd7608a8"></div>
@@ -222,7 +222,8 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 			</div>
 				</div>
 		<div class="wrap">
-<h2>plan<a href="/blog/plan/add/" class="add-new-h2">add plan</a></h2>
+<h2>article2 <a href="/blog/product/add/" class="add-new-h2">add article2</a></h2>
+
 
 
 <form id="posts-filter" action="" method="get">
@@ -243,16 +244,16 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 	{% block content %}
     <ul>
-        {% for publisher in plan %}
+        {% for publisher in product %}
            
             	<tbody id="the-list">
 				<tr id="post-1" class="post-1 type-post status-publish format-standard hentry category-uncategorized alternate iedit author-self level-0">
 				
-			<td class="post-title page-title column-title"><strong><a class="row-title" href="/blog/plan/change/{{publisher.id}}" title="编辑{{ publisher.title }}">{{ publisher.title }}</a></strong>
+			<td class="post-title page-title column-title"><strong><a class="row-title" href="/blog/product/change/{{publisher.id}}" title="编辑{{ publisher.title }}">{{ publisher.title }}</a></strong>
 <div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
-<div class="row-actions"><span class="edit"><a href="/blog/plan/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/blog/plan/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/product/{{publisher.id}}" title="查看“世界，你好！”" rel="permalink">查看</a></span></div>
+<div class="row-actions"><span class="edit"><a href="/blog/product/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/blog/product/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/product/{{publisher.id}}" title="查看“世界，你好！”" rel="permalink">查看</a></span></div>
 </td>		
-			<td class="categories column-categories">plan</td>
+			<td class="categories column-categories">产品</td>
 			</tr>
 		</tbody>
         {% endfor %}
@@ -260,7 +261,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 	{% endblock %}
 
 </table>
-	
+
 		<br class="clear">
 	</div>
 
@@ -522,6 +523,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 	</div>
 
 	<!-- END CONTAINER -->
+
 
 	<!-- END FOOTER -->
 

@@ -13,5 +13,6 @@ urlpatterns = patterns('',
 
     url(r'^blog/',include('blog.urls')),
     url(r'^backSys/',include('backSys.urls')),
-    url(r'',include('frontSys.urls'))
+    url(r'',include('frontSys.urls')),
+    (r'^files/(?P<path>.*)','django.views.static.serve',{'document_root':settings.UPLOAD_PATH}), 
 )

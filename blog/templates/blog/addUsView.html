@@ -1,11 +1,13 @@
 
 {% load staticfiles %}
 
-<form method = 'post' action = 'addUs'>
+<form method = 'post' action = '/blog/us/addUs/ '  enctype="multipart/form-data">
 	 {% csrf_token %}
-	<h2>标题<input name='title' value ='' ></h2>
-	<h3>输入优先级<input name="order" value="">（数字）</h3>
-    <textarea name= 'content'></textarea>
+	<h2>姓名<input name='name' value ='' ></h2>
+	<h3>输入优先级<input name="showOrder" value="">（数字）</h3>
+	<input name='img' id='img' type="file" onchange="change(this.value)" >
+	<input type='hidden' id = 'type' name = 'type' value="">
+    <textarea name= 'description'></textarea>
     <input type='submit' value="确认">
     <input type='button' onclick = "history.go(-1)" value="取消">
 </form>
@@ -17,5 +19,11 @@ tinymce.init({
    language:"zh_CN",		
 
  });
+
+    function change(imgName){
+        var imgInfo = document.getElementById('type');
+        var infoArr = imgName.split('.');
+        imgInfo.value = infoArr[infoArr.length-1];
+    }
 </script>
 

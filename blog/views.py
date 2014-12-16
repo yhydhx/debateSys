@@ -10,7 +10,7 @@ from debateSNS.models import *
 import datetime
 from django.utils import timezone
 from django.conf import settings
-import hashlib, time
+import hashlib, time, random
 
 
 '''def index(request):
@@ -44,7 +44,7 @@ def loginCertifacate(request):
         admin = get_object_or_404(Admin, username=username)
         if admin.password == password:
             request.session['username'] = username
-            return HttpResponseRedirect('/blog/news/show')
+            return HttpResponseRedirect('/blog/article/show')
         else:
             return HttpResponse("密码错误") 
         
@@ -216,61 +216,128 @@ def article(request,method,Oid):
 
 
 ########################################################
-# this view is about the product 
+# this view is about the activity 
 # contains show news list , add news , change news, 
 # delete news,and add new news
 # News contain three parts , title content date                 
 ########################################################
-#
 
-def product(request,method,Oid):
+
+def activity(request,method,Oid):
     try:
         request.session['username']
     except KeyError,e:
         return HttpResponseRedirect('login.html')
-    if method == 'addProduct':
+    if method == 'addActivity':
         title = request.POST.get('title')
-        content = request.POST.get('content')
-        product = Product(
+        introduction = request.POST.get('introduction')
+        activity = Activity(
             title=title,
-            content = content,
-            uploadUser = request.session['username'],
+            time = datetime.datetime.now(),
+            introduction = introduction,
+            pulisher = request.session['username'],
             )
-        product.save()
-        #return HttpResponse(product.id)
-        return HttpResponseRedirect('/blog/product/show')
+        activity.save()
+        #return HttpResponse(activity.id)
+        return HttpResponseRedirect('/blog/activity/show')
     elif method == 'change':
-        return render(request,'blog/changeProduct.html',{'product':Product.objects.get(id=Oid)})
+        return render(request,'blog/changeActivity.html',{'activity':Activity.objects.get(id=Oid)})
 
     elif method == 'save':
         if request.method == 'POST':
-            product = {'id' : request.POST.get('id'),
+            activity = {'id' : request.POST.get('id'),
                 'title' : request.POST.get('title'),
-                'content' : request.POST.get('content'),
+                'introduction' : request.POST.get('introduction'),
                 }
 
-        Product.objects.filter(id=product['id']).update(content=product['content'],title=product['title'])
-        #Product.objects.filter(id=product['id']).update(title=product['title'])
-        Oid = product['id']
-        return HttpResponseRedirect('/blog/product/show')
+        Activity.objects.filter(id=activity['id']).update(introduction=activity['introduction'],title=activity['title'])
+        
+        Oid = activity['id']
+        return HttpResponse(str(activity))
+        return HttpResponseRedirect('/blog/activity/show')
 
     elif method == 'delete':
-        Product.objects.filter(id=Oid).delete()
+        Activity.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show')
     elif method == 'add':
-        return render(request,'blog/addProductView.html')
+        return render(request,'blog/addActivityView.html')
     elif method == 'show':
-        return render(request,'blog/showProductList.html',{'product':Product.objects.all()})
+        return render(request,'blog/showActivityList.html',{'activity':Activity.objects.all()})
     else:
         return HttpResponse('没有该方法')
 
 
+
+
 ########################################################
-# this view is about the Plan 
-# contains show news list , add news , change news, 
-# delete news,and add new news
+# this view is about the us
+# contains show news list , add  Us , change Us, 
+# delete one,and add new one
 # News contain three parts , title content date                 
 ########################################################
+
+def us(request,method,Oid):
+    try:
+        request.session['username']
+    except KeyError,e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addUs':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        showOrder = request.POST.get('showOrder')
+        blog_href = request.POST.get('blog_href')
+        imageType = request.POST.get('type')
+        '''save the imageFIle '''
+        tmpImg = request.FILES['img']
+        if tmpImg == None:
+            return HttpResponse("Not upload a Image")
+        imageName = initFileName()+'.'+imageType
+        relativePath = "/files/images/"+imageName
+        des_origin_path = settings.UPLOAD_PATH+'/images/'+imageName
+        des_origin_f = open(des_origin_path, "ab") 
+        
+        for chunk in tmpImg.chunks():  
+            des_origin_f.write(chunk)   
+        des_origin_f.close() 
+        img = Image(
+            title = imageName,
+            location = relativePath,
+            uploadUser = request.session['username'],
+            )
+        img.save()
+        '''save the info of the member'''
+        member = Member(
+            name=name,
+            showOrder = int(showOrder),
+            description = description,
+            uploadUser = request.session['username'],
+            image = relativePath,
+            )
+        member.save()
+        #Oid = news.id
+        return HttpResponseRedirect('/blog/us/show')
+    elif method == 'change':
+        return render(request,'blog/changeUs.html',{'member':Member.objects.get(id=Oid)})
+    elif method == 'save':
+        if request.method == 'POST':
+            member = {'id' : request.POST.get('id'),
+                    'name' : request.POST.get('name'),
+                    'description' : request.POST.get('description'),
+                    'showOrder': request.POST.get('showOrder'),
+                    }
+            Member.objects.filter(id=member['id']).update(description=member['description'],name=member['name'],showOrder=member['showOrder'])
+
+        return HttpResponseRedirect('/blog/us/show')
+
+    elif method == 'delete':
+        Member.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        return render(request,'blog/addUsView.html')
+    elif method == 'show':
+        return render(request,'blog/showUsList.html',{'member':Member.objects.all()})
+    else:
+        return HttpResponse('没有该方法')
 
 
 def plan(request,method,Oid):
@@ -314,57 +381,7 @@ def plan(request,method,Oid):
     else:
         return HttpResponse('没有该方法')
 
-########################################################
-# this view is about the us
-# contains show news list , add  Us , change Us, 
-# delete one,and add new one
-# News contain three parts , title content date                 
-########################################################
 
-def us(request,method,Oid):
-    try:
-        request.session['username']
-    except KeyError,e:
-        return HttpResponseRedirect('login.html')
-    if method == 'addUs':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        order = request.POST.get('order')
-        us = Us(
-            title=title,
-            order = order,
-            content = content,
-            uploadUser = request.session['username'],
-            )
-        us.save()
-        #Oid = news.id
-        return HttpResponseRedirect('/blog/us/show')
-    elif method == 'change':
-        return render(request,'blog/changeUs.html',{'us':Us.objects.get(id=Oid)})
-    elif method == 'save':
-        if request.method == 'POST':
-            us = {'id' : request.POST.get('id'),
-                    'title' : request.POST.get('title'),
-                    'content' : request.POST.get('content'),
-                    'order': request.POST.get('order'),
-                    }
-
-            Us.objects.filter(id=us['id']).update(content=us['content'])
-            Us.objects.filter(id=us['id']).update(title=us['title'])
-            Us.objects.filter(id=us['id']).update(order=us['order'])
-            Oid = us['id']
-
-        return HttpResponseRedirect('/blog/us/show')
-
-    elif method == 'delete':
-        Us.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
-    elif method == 'add':
-        return render(request,'blog/addUsView.html')
-    elif method == 'show':
-        return render(request,'blog/showUsList.html',{'us':Us.objects.all()})
-    else:
-        return HttpResponse('没有该方法')
 
 
 
@@ -513,3 +530,6 @@ def deleteImg(request,Oid):
 def test(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     return   HttpResponse(BASE_DIR)
+
+def initFileName():
+    return hashlib.md5(str(random.random() + time.time())).hexdigest()

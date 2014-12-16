@@ -1,14 +1,13 @@
 
 {% load staticfiles %}
 
-<form method = 'post' action = '/blog/contact/addContact/'>
+<form method = 'post' action = '/blog/activity/addActivity/'>
 	 {% csrf_token %}
-	<h4>电话：<input name='tel' value ='' ></h4>
-	<h4>邮箱：<input name='email' value ='' ></h4>
-	<h4>地址：<input name='address' value ='' ></h4>
+	<h2>标题<input name='title' value ='' ></h2>
+
+    <textarea name= 'introduction'></textarea>
     <input type='submit' value="确认">
     <input type='button' onclick = "history.go(-1)" value="取消">
-
 </form>
 
 <script type="text/javascript" src="{% static 'blog/js/tinymce/tinymce.min.js' %}"  ></script>
