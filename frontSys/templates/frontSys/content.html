@@ -1,114 +1,45 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
-<html lang="zh">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>信软辩论队</title>
-
-     <!-- Bootstrap -->
- 
-    <link href=  {% static "frontSys/lib/bootstrap/css/bootstrap.min.css" %}  rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href=   {% static "frontSys/lib/Font-Awesome-3.2.1/css/font-awesome.min.css"  %}>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- User Define -->
-    <script type="text/javascript" src={% static "blog/js/tinymce/tinymce.min.js"  %} </script>
-    <script type="text/javascript">
-	tinymce.init({
-		selector: "textarea"
-	});
-    </script>
-
-    <link href= {% static "frontSys/css/index.css"%} rel="stylesheet">
-    <link href= {% static "frontSys/css/article.css"%} rel="stylesheet">
-  </head>
-  <body>  
-  	<!-- Static navbar -->
-      <nav class="navbar navbar-default" role="navigation" style="margin: 0px;">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                      <span class="sr-only">Navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="/index.html">首页</a>
-              </div>
-          
-              <div id="navbar" class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                      <li><a href="/article.html"><i class="icon-envelope"></i>&nbsp;文章</a></li>
-                      <li><a href="#"><i class="icon-bookmark"></i>&nbsp;活动</a></li>
-                      <li><a href="#"><i class="icon-wrench"></i>&nbsp;小工具</a></li>
-                  </ul>
-                  
-                  <form class="navbar-form navbar-left" role="search">
-                      <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Search">
-                      </div>
-                      
-                      <button type="submit" class="btn btn-default"><i class="icon-search"></i></button>
-                  </form>
-                  
-                  <ul class="nav navbar-nav navbar-right">
-                      <li><a href="./"><i class="icon-group"></i>&nbsp;关于我们</a></li>
-                  </ul>
-              </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
-    	</nav>
-
-    
-      <div class="container marketing">  
-      	<!-- START THE FEATURETTES -->
-      	<div class="row featurette">
-        	<div class="col-md-7">
-          		<h2 class="featurette-heading">{{ article.title }}<span class="text-muted"><small>written by&nbsp{{article.author}}</small></span></h2>
-                {% autoescape off%}
-          		<p class="lead">{{ article.content }}</p>
-              {% endautoescape%}
-        	</div>
-
-		
-		<div class="col-md-7" style="height: 40%;">
-			<p class="lead">评论区</p>
-		</div>
-
-	<hr class="featurette-divider">
-		<div class="row featurette">
-			<form class="form-horizental" role="form">
-				<div class="form-group">
-					<label for="InputComment">你的评论：</label>
-					<textarea class="font-control" id="InputComment"></textarea>
-				</div>
-			</form>
-		</div>
-	
-	<hr class="featurette-divider">
-        
-      	</div>
-	</div>
-      <!-- /END THE FEATURETTES -->
+<html lang="en">
+<head>
+  <link href="{% static 'frontSys/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'frontSys/css/site.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'frontSys/js/jquery.js' %}" type="text/javascript"></script>
+  <script src="{% static 'frontSys/js/bootstrap.js' %}" type="text/javascript"></script>
+  <script src="{% static 'frontSys/js/global.js' %}" type="text/javascript"></script>
+  
+</head>
+<body>
+<div   class="container">
 
 
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-      </footer>
+{%include "frontSys/header.html"%}
 
-    </div>
-   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src={% static  "frontSys/js/jquery.min.js" %}></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src= {% static  "frontSys/lib/bootstrap/js/bootstrap.min.js" %}></script>
-  </body>
+
+<div class="panel panel-success">
+  <div class="panel-heading news_heading">
+    <h2 class="featurette-heading">{{ article.title }}</h2>
+    <span class="text-muted">{{article.introduction}}</span>
+  </div>
+  <div class="panel-body news" >
+    <p class="lead">{{ article.content |safe}}</p>
+  </div>
+
+
+</div>
+
+<div class="panel panel-success" id='answer' style='display:none'>
+  <div class="panel-heading news_heading">
+    <h3 class="panel-title">Answer</h3>
+  </div>
+  <div class="panel-body news" id= 'ans'> 
+
+  </div>
+</div>
+<div class="push"></div>
+</div>
+
+
+</body>
 </html>

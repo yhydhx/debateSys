@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>信软辩论队</title>
+
+     <!-- Bootstrap -->
+ 
+    <link href=  {% static "frontSys/lib/bootstrap/css/bootstrap.min.css" %}  rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href=   {% static "frontSys/lib/Font-Awesome-3.2.1/css/font-awesome.min.css"  %}>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- User Define -->
+    <script type="text/javascript" src={% static "blog/js/tinymce/tinymce.min.js"  %} </script>
+    <script type="text/javascript">
+	tinymce.init({
+		selector: "textarea"
+	});
+    </script>
+
+    <link href= {% static "frontSys/css/index.css"%} rel="stylesheet">
+    <link href= {% static "frontSys/css/article.css"%} rel="stylesheet">
+  </head>
+  <body>  
+  	<!-- Static navbar -->
+      
+
+    
+      <div class="container marketing">  
+      	<!-- START THE FEATURETTES -->
+      	<div class="row featurette">
+        	<div class="col-md-7">
+          		<h2 class="featurette-heading">{{ article.title }}<span class="text-muted"><small>written by&nbsp{{article.introduction}}</small></span></h2>
+                {% autoescape off%}
+          		<p class="lead">{{ article.content }}</p>
+              {% endautoescape%}
+        	</div>
+
+		
+		<div class="col-md-7" style="height: 40%;">
+			<p class="lead">评论区</p>
+		</div>
+
+	<hr class="featurette-divider">
+		<div class="row featurette">
+			<form class="form-horizental" role="form">
+				<div class="form-group">
+					<label for="InputComment">你的评论：</label>
+					<textarea class="font-control" id="InputComment"></textarea>
+				</div>
+			</form>
+		</div>
+	
+	<hr class="featurette-divider">
+        
+      	</div>
+	</div>
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      
+
+    </div>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src={% static  "frontSys/js/jquery.min.js" %}></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src= {% static  "frontSys/lib/bootstrap/js/bootstrap.min.js" %}></script>
+  </body>
+</html>
