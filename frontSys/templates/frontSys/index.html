@@ -66,39 +66,7 @@
     </div>   
     
   	<!-- Static navbar -->
-      <nav class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                      <span class="sr-only">Navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="/index.html">首页</a>
-              </div>
-          
-              <div id="navbar" class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                      <li><a href="/article.html"><i class="icon-envelope"></i>&nbsp;文章</a></li>
-                      <li><a href="#"><i class="icon-bookmark"></i>&nbsp;活动</a></li>
-                      <li><a href="#"><i class="icon-wrench"></i>&nbsp;小工具</a></li>
-                  </ul>
-                  
-                  <form class="navbar-form navbar-left" role="search">
-                      <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Search">
-                      </div>
-                      
-                      <button type="submit" class="btn btn-default"><i class="icon-search"></i></button>
-                  </form>
-                  
-                  <ul class="nav navbar-nav navbar-right">
-                      <li><a href="./"><i class="icon-group"></i>&nbsp;关于我们</a></li>
-                  </ul>
-              </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
-    	</nav>
+      {%include "frontSys/header.html"%}
       
     <div class="container">
 
@@ -127,11 +95,7 @@
       		</div>
             
       <!-- FOOTER -->
-      <footer>
-      	<hr class="featurette-divider">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-      </footer>
+      {%include "frontSys/footer.html"%}
             
     </div> 
     
